@@ -1,0 +1,78 @@
+@font-face {
+  font-family: glitchGoblin; 
+  src: url(GlitchGoblin-2O87v.ttf); 
+}
+
+body {
+    font-family: glitchGoblin;
+    color: white;
+    background-color: black;
+}
+
+h1 {
+    text-shadow: 2px 2px grey;
+}
+
+@keyframes grow {
+    from {
+        transform: scale(1);
+    } 
+    to {
+        transform: scale(1.2); 
+    }
+}
+
+
+img:hover {
+    animation-name: grow;
+    animation-duration: 2s;
+}
+
+button {
+    color: white;
+    border-radius: 15px;
+    background-image: linear-gradient(to right, black, blue);
+}
+
+#intro {
+    text-align: center;
+    border: 2px solid red;
+}
+
+#strong-border {
+    border: 5px solid blue;
+}
+
+.container {
+    display: grid;
+    row-gap: 20px;
+    column-gap: 30px;
+    justify-items: center;
+}
+
+.grid-header, .grid-footer, header, footer {
+    text-align: center;
+}
+
+/* Responsive design for phones */
+@media (max-width: 600px) {
+    .container {
+        grid-template-columns: 1fr;
+
+    }
+}
+
+/* Responsive design for large phones and portrait tablets */
+@media (min-width: 600px) {
+    .container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Responsive design for landscape tablets, laptops, and desktops */
+@media (min-width: 768px)
+{
+    .container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
