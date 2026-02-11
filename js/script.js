@@ -78,7 +78,7 @@
 
 const displayProducts = () => {
     let main = document.querySelector("main");
-    let productDisplay, content, contentTop = `<section>`, contentBottom = `</section>`;
+    let content = "<section>";
 
     // Create the array for the items to sell
     // Product Image Product Name Price
@@ -98,13 +98,26 @@ const displayProducts = () => {
         let productName = products[i + 1];
         let price = products[i + 2];
 
-        console.log(image);
-        console.log(productName);
-        console.log(price);
-        console.log("\n");
+        content += `<div class="product">`
         // Add the image
-        // content += `<img src="${product[i]}" height="200" width="200">`;
-        // // Add the product name
-        // content += `<p>${product[i + 1]}`
+        content += `<img src="${image}" height="200" width="200" alt="${productName}"/> `;
+        // Add the product name
+        content += `<h3>${productName}</h3>`;
+        // Add the price
+        content += `<p class="price">$${price.toFixed(2)}</p>`;
+        // Add the quantity, and give it an id depending on the product
+        let productId = productName.toLowerCase().replace(/[:\s]/g, '-');
+        content += `<label for="${productId}-quantity">Quantity:</label>`;
+        content += `<input type="number" id="${productId}-quantity" min="0" value="0">`;
+
+        // Add the button, and it an id depending on the product
+        content += `<button id = ${productId}-button>Buy Now</button>`;
+
+        content += `</div>`;
     }
+
+    content += "</section>";
+
+    // Display the product on the page
+    main.innerHTML = content;
 }

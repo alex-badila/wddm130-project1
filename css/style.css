@@ -22,7 +22,6 @@ h1 {
     }
 }
 
-
 img:hover {
     animation-name: grow;
     animation-duration: 2s;
@@ -43,11 +42,58 @@ button {
     border: 5px solid blue;
 }
 
-.container {
+.container section {
     display: grid;
     row-gap: 20px;
     column-gap: 30px;
     justify-items: center;
+}
+
+/* Style each product card */
+.product {
+    background-color: #1a1a1a;
+    border: 2px solid #333;
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product img {
+    display: block;
+    margin: 0 auto 10px;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.product h3 {
+    margin: 10px 0 5px 0;
+    font-size: 1.1em;
+    width: 100%;
+}
+
+.product .price {
+    font-weight: bold;
+    color: #4CAF50;
+    font-size: 1.2em;
+    margin: 5px 0 10px 0;
+    width: 100%;
+}
+
+.product label {
+    display: block;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.product input {
+    width: 60px;
+    margin-top: 5px;
+    padding: 5px;
+    text-align: center;
 }
 
 .grid-header, .grid-footer, header, footer {
@@ -56,23 +102,21 @@ button {
 
 /* Responsive design for phones */
 @media (max-width: 600px) {
-    .container {
+    .container section {
         grid-template-columns: 1fr;
-
     }
 }
 
 /* Responsive design for large phones and portrait tablets */
 @media (min-width: 600px) {
-    .container {
+    .container section {
         grid-template-columns: 1fr 1fr;
     }
 }
 
 /* Responsive design for landscape tablets, laptops, and desktops */
-@media (min-width: 768px)
-{
-    .container {
+@media (min-width: 768px) {
+    .container section {
         grid-template-columns: repeat(3, 1fr);
     }
 }
