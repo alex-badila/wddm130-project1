@@ -76,3 +76,35 @@
 //     }
 // }
 
+const displayProducts = () => {
+    let main = document.querySelector("main");
+    let productDisplay, content, contentTop = `<section>`, contentBottom = `</section>`;
+
+    // Create the array for the items to sell
+    // Product Image Product Name Price
+    const products = ["neuromancer.jpg", "Neuromancer", 25.99,
+                        "the-matrix-dvd.jpg", "The Matrix DVD", 19.99,
+                        "equilibrium-dvd.jpg", "Equilibrium DVD", 29.99,
+                        "mona-lisa-overdrive.jpg", "Mona Lisa Overdrive", 15.99,
+                        "count-zero.jpg", "Count Zero", 25.99,
+                        "ghost-in-the-shell-dvd.jpg", "Ghost in the Shell DVD", 12.99,
+                        "akira-dvd.jpg", "Akira DVD", 26.99,
+                        "alita-battle-angel-dvd.jpg", "Alita: Battle Angel DVD", 19.99
+    ]
+
+    // Loop through the array and display its information on the page
+    for(let i = 0; i < products.length; i += 3) {
+        let image = products[i];
+        let productName = products[i + 1];
+        let price = products[i + 2];
+
+        console.log(image);
+        console.log(productName);
+        console.log(price);
+        console.log("\n");
+        // Add the image
+        // content += `<img src="${product[i]}" height="200" width="200">`;
+        // // Add the product name
+        // content += `<p>${product[i + 1]}`
+    }
+}
