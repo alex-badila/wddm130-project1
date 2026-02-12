@@ -1,22 +1,8 @@
-// // Declare variables to use in the program
-// let neuromancerCost = 25.99;
-// let theMatrixDVDCost = 19.99;
-// let equilibriumDVDCost = 29.99;
-// let monaLisaOverdriveCost = 15.99;
-// let countZeroCost = 25.99;
-// let ghostInTheShellDVDCost = 12.99;
-// let akiraDVDCost = 26.99;
-// let alitaBattleAngelDVDCost = 19.99;  
-// let total = 0;
-// let tax = 1.13;
-
-// // Add the total to the HTML
-// document.getElementById("total").innerHTML = total;
-
 let subTotal = 0, tax = 0.13, total = 0, grandTotal = 0;
 let cart = document.getElementById("cart");
+let receipt = document.getElementById("receipt");
 
-
+// Dynamically displays the products
 const displayProducts = () => {
     let left = document.getElementById("left");
     let content = "<section>";
@@ -65,6 +51,7 @@ const displayProducts = () => {
     attachEventListeners();
 }
 
+// Attaches listeners to each button
 function attachEventListeners() {
     let neuromancerButton = document.getElementById("neuromancer-button");
     let theMatrixDVDButton = document.getElementById("the-matrix-dvd-button");
@@ -139,17 +126,43 @@ function handleClick() {
     quantityInput.value = 0;
 }
 
+// Evaluates a regular expression on an input
+const validateWithRegEx = (regEx, inputString) => {
+    return regEx.test(inputString);
+}
+
+// Generates the receipt of the purchase
 const generateReceipt = () => {
+    let postalRegEx = /^[a-zA-Z]\d[a-zA-Z]\s?\d[a-zA-Z]\d$/;
+    let phoneRegEx = /^\(?\d{3}\)?(\s|-)\d{3}(\s|-)\d{4}$/;
+    let emailRegEx = /^\w+@[a-zA-Z0-9]+.[a-zA-Z0-9]+$/;
+
     // Extract all the relevant values from the form
     let thisForm = document.forms["checkoutForm"];
+    let name = thisForm["name"].value;
     let email = thisForm["email"].value;
-    let productType = thisForm["productType"].value;
-    let quantity = thisForm["quantity"].value;
-    let promoCode = thisForm["promoCode"].value;
-    let postalCode = thisForm["postalCode"].value;
     let phoneNumber = thisForm["phoneNumber"].value;
+    let postalCode = thisForm["postalCode"].value; 
 
+    // Clear the receipt area for new info
+    receipt.innerHTML = "";
 
+    // Perform validation on the form inputs
+    if(name !== "" && validateWithRegEx(emailRegEx, email) && validateWithRegEx(phoneRegEx, phoneNumber) && validateWithRegEx(postalRegEx, postalCode) && cart.innerHTML !== "") {
+        let successMsg = document.createElement("p");
+        successMsg.textContent = "Success!";
+        receipt.appendChild(successMsg);
+    }
+    else if(cart.innerHTML === "") {
+        let cartEmptyMsg = document.createElement("p");
+        cartEmptyMsg.textContent = "Shopping cart is empty.";
+        receipt.appendChild(cartEmptyMsg);
+    }
+    else {
+        let invalidInputMsg = document.createElement("p");
+        invalidInputMsg.textContent = "Error: Invalid input";
+        receipt.appendChild(invalidInputMsg);
+    }
 
     return false;
 }
