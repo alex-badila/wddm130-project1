@@ -1,6 +1,7 @@
 let subTotal = 0, tax = 0.13, total = 0, grandTotal = 0;
 let cart = document.getElementById("cart");
 let receipt = document.getElementById("receipt");
+let message = document.getElementById("message");
 let receiptNumber = 0;
 
 // Dynamically displays the products
@@ -73,7 +74,7 @@ function attachEventListeners() {
     alitaBattleAngelDVDButton.addEventListener("click", handleClick);
 }
 
-// If clicked, add the relevant information to the shopping cart
+// If button clicked, adds the relevant information to the shopping cart
 function handleClick() {
     // Get the product ID without the "-button" suffix
     let productId = this.id.replace('-button', '');
@@ -87,9 +88,13 @@ function handleClick() {
     
     // Validate quantity
     if (quantity <= 0) {
-        cart.textContent = "Please enter a quantity greater than 0";
+        message.textContent = "Please enter a quantity greater than 0";
         return;
     }
+
+    // Clear the message section when valid quantity is entered
+    message.textContent = "";
+
 
     // Clear any error messages (check if cart only contains text)
     if (cart.childNodes.length === 1 && cart.childNodes[0].nodeType === Node.TEXT_NODE) {

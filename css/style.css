@@ -42,11 +42,24 @@ button {
     border: 5px solid blue;
 }
 
-.container section {
+#left > section {
     display: grid;
     row-gap: 20px;
     column-gap: 30px;
     justify-items: center;
+}
+
+#right {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    min-width: 250px;
+}
+
+/* Make child sections flexible */
+#right > section {
+    flex: 1;  
+    min-width: 200px; 
 }
 
 /* Style each product card */
@@ -125,16 +138,11 @@ header, footer {
     }
 }
 
-
 .container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;  
+    grid-template-columns: 1fr 1fr;  
     gap: 30px;
     padding: 20px;
-}
-
-#right {
-    min-width: 250px;
 }
 
 /* Style the cart section */
@@ -275,4 +283,11 @@ header, footer {
 #receipt {
     display: flex;
     flex-direction: column;
+}
+
+#message {
+    background-color: #1a1a1a;
+    padding: 15px;
+    border-radius: 8px;
+    border: 2px solid #333;
 }
