@@ -1,6 +1,7 @@
 let subTotal = 0, tax = 0.13, total = 0, grandTotal = 0;
 let cart = document.getElementById("cart");
 let receipt = document.getElementById("receipt");
+let receiptNumber = 0;
 
 // Dynamically displays the products
 const displayProducts = () => {
@@ -86,8 +87,13 @@ function handleClick() {
     
     // Validate quantity
     if (quantity <= 0) {
-        alert("Please enter a quantity greater than 0");
+        cart.textContent = "Please enter a quantity greater than 0";
         return;
+    }
+
+    // Clear any error messages (check if cart only contains text)
+    if (cart.childNodes.length === 1 && cart.childNodes[0].nodeType === Node.TEXT_NODE) {
+        cart.textContent = "";
     }
 
     // Calculate subtotal for this item
@@ -113,7 +119,6 @@ function handleClick() {
     if (!totalsSection) {
         totalsSection = document.createElement("div");
         totalsSection.id = "totals";
-        cart.appendChild(totalsSection);
     }
     
     totalsSection.innerHTML = `
@@ -121,6 +126,9 @@ function handleClick() {
         <p>Tax (13%): $${taxAmount.toFixed(2)}</p>
         <p><strong>Total: $${grandTotal.toFixed(2)}</strong></p>
     `;
+    
+    // Always append totals at the end (this removes it from current position and adds it to the end)
+    cart.appendChild(totalsSection);
     
     // Reset the quantity input
     quantityInput.value = 0;
@@ -149,6 +157,63 @@ const generateReceipt = () => {
 
     // Perform validation on the form inputs
     if(name !== "" && validateWithRegEx(emailRegEx, email) && validateWithRegEx(phoneRegEx, phoneNumber) && validateWithRegEx(postalRegEx, postalCode) && cart.innerHTML !== "") {
+        // Display the receipt number
+        receiptNumber++;
+        let receiptNumberP = document.createElement("p");
+        receiptNumberP.textContent = `Receipt Number: ${receiptNumber}`;
+        receipt.appendChild(receiptNumberP);
+
+        // Display the date and time
+        const date = new Date();
+        let dateP = document.createElement("p");
+        dateP.textContent = `Date: ${date.toLocaleString('default', { month: 'long' })} ${date.getDate()}, ${date.getFullYear()}`;
+        receipt.appendChild(dateP);
+
+        let timeP = document.createElement("p");
+        timeP.textContent = `Time: ${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
+        receipt.appendChild(timeP);
+        
+        // Add a separator or heading for items
+        let itemsHeading = document.createElement("h3");
+        itemsHeading.textContent = "Items Purchased:";
+        receipt.appendChild(itemsHeading);
+        
+        // Get all cart items (excluding the totals section)
+        let cartItems = cart.querySelectorAll('.cart-item');
+        
+        // Loop through cart items and display them in the receipt
+        cartItems.forEach(item => {
+            let itemDiv = document.createElement("div");
+            itemDiv.className = "receipt-item";
+            
+            // Clone the cart item content for the receipt
+            let productName = item.querySelector('h4').textContent;
+            let quantityInfo = item.querySelector('p:first-of-type').textContent;
+            let itemTotal = item.querySelector('p:last-of-type strong').textContent;
+            
+            itemDiv.innerHTML = `
+                <p><strong>${productName}</strong></p>
+                <p>${quantityInfo} = ${itemTotal}</p>
+            `;
+            
+            receipt.appendChild(itemDiv);
+        });
+
+
+        // Display the totals
+        let subTotalP = document.createElement("p");
+        subTotalP.textContent = `Subtotal: $${subTotal.toFixed(2)}`;
+        receipt.appendChild(subTotalP); 
+
+        let taxP = document.createElement("p");
+        taxP.textContent = `Tax (13%): $${(subTotal * tax).toFixed(2)}`;
+        receipt.appendChild(taxP); 
+
+        let grandTotalP = document.createElement("p");
+        grandTotalP.textContent = `Total: $${grandTotal.toFixed(2)}`;
+        receipt.appendChild(grandTotalP);
+
+        // Display the confirmation message
         let successMsg = document.createElement("p");
         successMsg.textContent = "Success!";
         receipt.appendChild(successMsg);
