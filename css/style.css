@@ -96,7 +96,7 @@ button {
     text-align: center;
 }
 
-.grid-header, .grid-footer, header, footer {
+header, footer {
     text-align: center;
 }
 
@@ -115,8 +115,157 @@ button {
 }
 
 /* Responsive design for landscape tablets, laptops, and desktops */
-@media (min-width: 768px) {
-    .container section {
-        grid-template-columns: repeat(3, 1fr);
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
     }
+    
+    #right {
+        order: 2;
+    }
+}
+
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;  
+    gap: 30px;
+    padding: 20px;
+}
+
+#right {
+    min-width: 250px;
+}
+
+/* Style the cart section */
+#cart {
+    background-color: #1a1a1a;
+    padding: 15px;
+    border-radius: 8px;
+    border: 2px solid #333;
+}
+
+#cart h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+    border-bottom: 2px solid #4CAF50;
+    padding-bottom: 10px;
+}
+
+/* Style individual cart items */
+.cart-item {
+    background-color: #2a2a2a;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border-left: 3px solid #4CAF50;
+}
+
+.cart-item h4 {
+    margin: 0 0 8px 0;
+    color: #4CAF50;
+    font-size: 1em;
+}
+
+.cart-item p {
+    margin: 4px 0;
+    font-size: 0.85em;
+    line-height: 1.4;
+}
+
+.cart-item hr {
+    border: none;
+    border-top: 1px solid #444;
+    margin: 10px 0 0 0;
+}
+
+/* Style the totals section */
+#totals {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #2a2a2a;
+    border-radius: 5px;
+    border: 2px solid #4CAF50;
+}
+
+#totals p {
+    margin: 8px 0;
+    font-size: 0.9em;
+}
+
+#totals p:last-child {
+    font-size: 1.1em;
+    color: #4CAF50;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #444;
+}
+
+/* Checkout section styling */
+#checkout {
+    background-color: #1a1a1a;
+    padding: 15px;
+    border-radius: 8px;
+    border: 2px solid #333;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;  /* Force vertical stacking */
+}
+
+#checkout h2 {
+    margin: 0 0 15px 0;
+    font-size: 1.3em;
+    border-bottom: 2px solid #4CAF50;
+    padding-bottom: 10px;
+    order: 1;  /* Ensure h2 comes first */
+}
+
+#checkout form {
+    display: block;
+    width: 100%;
+    order: 2;  /* Form comes second */
+}
+
+#checkout fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+#checkout fieldset > section {
+    display: block;
+    margin-bottom: 12px;
+}
+
+#checkout label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+    color: white;
+}
+
+#checkout input[type="text"],
+#checkout input[type="email"],
+#checkout select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: #2a2a2a;
+    color: white;
+    font-size: 0.9em;
+    box-sizing: border-box;
+}
+
+#checkout input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-image: linear-gradient(to right, black, blue);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 10px;
 }

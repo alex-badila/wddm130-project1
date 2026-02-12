@@ -13,71 +13,12 @@
 // // Add the total to the HTML
 // document.getElementById("total").innerHTML = total;
 
-// // Create variables to represent all the buttons
-// let neuromancerButton = document.getElementById("neuromancerButton");
-// let theMatrixDVDButton = document.getElementById("theMatrixDVDButton");
-// let equilibriumDVDButton = document.getElementById("equilibriumDVDButton");
-// let monaLisaOverdriveButton = document.getElementById("monaLisaOverdriveButton");
-// let countZeroButton = document.getElementById("countZeroButton");
-// let ghostInTheShellDVDButton = document.getElementById("ghostInTheShellDVDButton");
-// let akiraDVDButton = document.getElementById("akiraDVDButton");
-// let alitaBattleAngelDVDButton = document.getElementById("alitaBattleAngelDVDButton");
+let subTotal = 0, tax = 0.13, total = 0, grandTotal = 0;
+let cart = document.getElementById("cart");
 
-// // Listen for the click for all the buttons
-// // If clicked, handle the click
-// neuromancerButton.addEventListener("click", handleClick);
-// theMatrixDVDButton.addEventListener("click", handleClick);
-// equilibriumDVDButton.addEventListener("click", handleClick);
-// monaLisaOverdriveButton.addEventListener("click", handleClick);
-// countZeroButton.addEventListener("click", handleClick);
-// ghostInTheShellDVDButton.addEventListener("click", handleClick);
-// akiraDVDButton.addEventListener("click", handleClick);
-// alitaBattleAngelDVDButton.addEventListener("click", handleClick);
-
-// // If clicked, check which button was clicked
-// // Then add the corresponding cost to the total, including tax
-// // Then add the total to the HTML
-// // Display an error message if the input is invalid
-// function handleClick() {
-//     if(this.id === "neuromancerButton") {
-//         total += neuromancerCost * tax;
-//         document.getElementById("total").innerHTML = total.toFixed(2);
-//     }
-//     else if(this.id === "theMatrixDVDButton") {
-//         total += theMatrixDVDCost * tax;
-//         document.getElementById("total").innerHTML = total.toFixed(2);
-//     }
-//     else if(this.id === "equilibriumDVDButton") {
-//         total += equilibriumDVDCost * tax;
-//         document.getElementById("total").innerHTML = total.toFixed(2);
-//     }
-//     else if(this.id === "monaLisaOverdriveButton") {
-//         total += monaLisaOverdriveCost * tax;
-//         document.getElementById("total").innerHTML = total.toFixed(2);
-//     }
-//     else if(this.id === "countZeroButton") {
-//         total += countZeroCost * tax;
-//         document.getElementById("total").innerHTML = total.toFixed(2);
-//     }
-//     else if(this.id === "ghostInTheShellDVDButton") {
-//         total += ghostInTheShellDVDCost * tax;
-//         document.getElementById("total").innerHTML = total.toFixed(2);
-//     }
-//     else if(this.id === "akiraDVDButton") {
-//         total += akiraDVDCost * tax;
-//         document.getElementById("total").innerHTML = total.toFixed(2);
-//     }
-//     else if(this.id === "alitaBattleAngelDVDButton") {
-//         total += alitaBattleAngelDVDCost * tax;
-//         document.getElementById("total").innerHTML = total.toFixed(2);
-//     }
-//     else {
-//         alert("Error! Invalid input.")
-//     }
-// }
 
 const displayProducts = () => {
-    let main = document.querySelector("main");
+    let left = document.getElementById("left");
     let content = "<section>";
 
     // Create the array for the items to sell
@@ -111,7 +52,7 @@ const displayProducts = () => {
         content += `<input type="number" id="${productId}-quantity" min="0" value="0">`;
 
         // Add the button, and it an id depending on the product
-        content += `<button id = ${productId}-button>Buy Now</button>`;
+        content += `<button id = "${productId}-button">Buy Now</button>`;
 
         content += `</div>`;
     }
@@ -119,5 +60,96 @@ const displayProducts = () => {
     content += "</section>";
 
     // Display the product on the page
-    main.innerHTML = content;
+    left.innerHTML = content;
+
+    attachEventListeners();
+}
+
+function attachEventListeners() {
+    let neuromancerButton = document.getElementById("neuromancer-button");
+    let theMatrixDVDButton = document.getElementById("the-matrix-dvd-button");
+    let equilibriumDVDButton = document.getElementById("equilibrium-dvd-button");
+    let monaLisaOverdriveButton = document.getElementById("mona-lisa-overdrive-button");
+    let countZeroButton = document.getElementById("count-zero-button");
+    let ghostInTheShellDVDButton = document.getElementById("ghost-in-the-shell-dvd-button");
+    let akiraDVDButton = document.getElementById("akira-dvd-button");
+    let alitaBattleAngelDVDButton = document.getElementById("alita--battle-angel-dvd-button");
+
+    neuromancerButton.addEventListener("click", handleClick);
+    theMatrixDVDButton.addEventListener("click", handleClick);
+    equilibriumDVDButton.addEventListener("click", handleClick);
+    monaLisaOverdriveButton.addEventListener("click", handleClick);
+    countZeroButton.addEventListener("click", handleClick);
+    ghostInTheShellDVDButton.addEventListener("click", handleClick);
+    akiraDVDButton.addEventListener("click", handleClick);
+    alitaBattleAngelDVDButton.addEventListener("click", handleClick);
+}
+
+// If clicked, add the relevant information to the shopping cart
+function handleClick() {
+    // Get the product ID without the "-button" suffix
+    let productId = this.id.replace('-button', '');
+    
+    // Get the product's data from the DOM
+    let productCard = this.closest('.product');
+    let productName = productCard.querySelector('h3').textContent;
+    let productPrice = parseFloat(productCard.querySelector('.price').textContent.replace('$', ''));
+    let quantityInput = document.getElementById(productId + '-quantity');
+    let quantity = parseInt(quantityInput.value);
+    
+    // Validate quantity
+    if (quantity <= 0) {
+        alert("Please enter a quantity greater than 0");
+        return;
+    }
+
+    // Calculate subtotal for this item
+    let itemSubtotal = productPrice * quantity;
+    
+    // Create cart item display
+    let cartItem = document.createElement("div");
+    cartItem.className = "cart-item";
+    cartItem.innerHTML = `
+        <h4>${productName}</h4>
+        <p>Qty: ${quantity} × $${productPrice.toFixed(2)}</p>
+        <p><strong>$${itemSubtotal.toFixed(2)}</strong></p>
+    `;
+    cart.appendChild(cartItem);
+    
+    // Update totals
+    subTotal += itemSubtotal;
+    let taxAmount = subTotal * tax;
+    grandTotal = subTotal + taxAmount;
+    
+    // Display or update totals section
+    let totalsSection = document.getElementById("totals");
+    if (!totalsSection) {
+        totalsSection = document.createElement("div");
+        totalsSection.id = "totals";
+        cart.appendChild(totalsSection);
+    }
+    
+    totalsSection.innerHTML = `
+        <p><strong>Subtotal: $${subTotal.toFixed(2)}</strong></p>
+        <p>Tax (13%): $${taxAmount.toFixed(2)}</p>
+        <p><strong>Total: $${grandTotal.toFixed(2)}</strong></p>
+    `;
+    
+    // Reset the quantity input
+    quantityInput.value = 0;
+}
+
+const generateReceipt = () => {
+    // Extract all the relevant values from the form
+    let thisForm = document.forms["checkoutForm"];
+    let email = thisForm["email"].value;
+    let productType = thisForm["productType"].value;
+    let quantity = thisForm["quantity"].value;
+    let promoCode = thisForm["promoCode"].value;
+    let postalCode = thisForm["postalCode"].value;
+    let phoneNumber = thisForm["phoneNumber"].value;
+
+
+
+    return false;
 }
