@@ -152,9 +152,12 @@ const generateReceipt = () => {
 
     // Extract all the relevant values from the form
     let thisForm = document.forms["checkoutForm"];
-    let name = thisForm["name"].value;
+    let fullName = thisForm["fullName"].value;
     let email = thisForm["email"].value;
     let phoneNumber = thisForm["phoneNumber"].value;
+    let address = thisForm["address"].value;
+    let city = thisForm["city"].value;
+    let province = thisForm["province"].value;
     let postalCode = thisForm["postalCode"].value; 
 
     // Clear the receipt area for new info
@@ -179,6 +182,46 @@ const generateReceipt = () => {
         timeP.textContent = `Time: ${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
         receipt.appendChild(timeP);
         
+        // Add a separator or heading for customer summary
+        let customerSummaryHeading = document.createElement("h3");
+        customerSummaryHeading.textContent = "Customer Summary:";
+        receipt.appendChild(customerSummaryHeading);
+
+        // Display the full name of the customer
+        let fullNameP = document.createElement("p");
+        fullNameP.textContent = `Full Name: ${fullName}`;
+        receipt.appendChild(fullNameP);
+
+        // Display the email address of the customer
+        let emailP = document.createElement("p");
+        emailP.textContent = `Email Address: ${email}`;
+        receipt.appendChild(emailP);
+
+        // Display the phone number of the customer
+        let phoneNumberP = document.createElement("p");
+        phoneNumberP.textContent = `Phone number: ${phoneNumber}`;
+        receipt.appendChild(phoneNumberP);
+
+        // Display the address of the customer
+        let addressP = document.createElement("p");
+        addressP.textContent = `Address: ${address}`;
+        receipt.appendChild(addressP);
+
+        // Display the city of the customer
+        let cityP = document.createElement("p");
+        cityP.textContent = `City: ${city}`;
+        receipt.appendChild(cityP);
+
+        // Display the province of the customer
+        let provinceP = document.createElement("p");
+        provinceP.textContent = `Province: ${province}`;
+        receipt.appendChild(provinceP);
+
+        // Display the postal code of the customer
+        let postalCodeP = document.createElement("p");
+        postalCodeP.textContent = `Postal Code: ${postalCode}`;
+        receipt.appendChild(postalCodeP);
+
         // Add a separator or heading for items
         let itemsHeading = document.createElement("h3");
         itemsHeading.textContent = "Items Purchased:";
