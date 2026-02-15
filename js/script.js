@@ -109,7 +109,7 @@ function handleClick() {
     cartItem.className = "cart-item";
     cartItem.innerHTML = `
         <h4>${productName}</h4>
-        <p>Qty: ${quantity} × $${productPrice.toFixed(2)}</p>
+        <p>${quantity} × $${productPrice.toFixed(2)}</p>
         <p><strong>$${itemSubtotal.toFixed(2)}</strong></p>
     `;
     cart.appendChild(cartItem);
@@ -161,7 +161,8 @@ const generateReceipt = () => {
     receipt.innerHTML = "";
 
     // Perform validation on the form inputs
-    if(name !== "" && validateWithRegEx(emailRegEx, email) && validateWithRegEx(phoneRegEx, phoneNumber) && validateWithRegEx(postalRegEx, postalCode) && cart.innerHTML !== "") {
+    // There is no validation for name, because it's required for the form to submit
+    if(validateWithRegEx(emailRegEx, email) && validateWithRegEx(phoneRegEx, phoneNumber) && validateWithRegEx(postalRegEx, postalCode) && cart.innerHTML !== "") {
         // Display the receipt number
         receiptNumber++;
         let receiptNumberP = document.createElement("p");
