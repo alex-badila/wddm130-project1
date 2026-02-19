@@ -271,6 +271,9 @@ const generateReceipt = () => {
         cart.innerHTML = "";
         subTotal = 0;
         grandTotal = 0;
+
+        // Reset the form
+        thisForm.reset();
     }
     else if(cart.innerHTML === "") {
         let cartEmptyMsg = document.createElement("p");
