@@ -97,9 +97,9 @@ function handleClick() {
 
 
     // Clear any error messages (check if cart only contains text)
-    if (cart.childNodes.length === 1 && cart.childNodes[0].nodeType === Node.TEXT_NODE) {
-        cart.textContent = "";
-    }
+    // if (cart.childNodes.length === 1 && cart.childNodes[0].nodeType === Node.TEXT_NODE) {
+    //     cart.textContent = "";
+    // }
 
     // Calculate subtotal for this item
     let itemSubtotal = productPrice * quantity;
@@ -110,7 +110,7 @@ function handleClick() {
     cartItem.innerHTML = `
         <h4>${productName}</h4>
         <p>${quantity} × $${productPrice.toFixed(2)}</p>
-        <p><strong>$${itemSubtotal.toFixed(2)}</strong></p>
+        <p class="bold">$${itemSubtotal.toFixed(2)}</p>
     `;
     cart.appendChild(cartItem);
     
@@ -127,9 +127,9 @@ function handleClick() {
     }
     
     totalsSection.innerHTML = `
-        <p><strong>Subtotal: $${subTotal.toFixed(2)}</strong></p>
+        <p class="bold">Subtotal: $${subTotal.toFixed(2)}</p>
         <p>Tax (13%): $${taxAmount.toFixed(2)}</p>
-        <p><strong>Total: $${grandTotal.toFixed(2)}</strong></p>
+        <p class="bold">Total: $${grandTotal.toFixed(2)}</p>
     `;
     
     // Always append totals at the end (this removes it from current position and adds it to the end)
@@ -238,10 +238,10 @@ const generateReceipt = () => {
             // Clone the cart item content for the receipt
             let productName = item.querySelector('h4').textContent;
             let quantityInfo = item.querySelector('p:first-of-type').textContent;
-            let itemTotal = item.querySelector('p:last-of-type strong').textContent;
+            let itemTotal = item.querySelector('p:last-of-type').textContent;
             
             itemDiv.innerHTML = `
-                <p><strong>${productName}</strong></p>
+                <p class="bold">${productName}</p>
                 <p>${quantityInfo} = ${itemTotal}</p>
             `;
             
@@ -266,6 +266,11 @@ const generateReceipt = () => {
         let successMsg = document.createElement("p");
         successMsg.textContent = "Success!";
         receipt.appendChild(successMsg);
+
+        // Clear the cart
+        cart.innerHTML = "";
+        subTotal = 0;
+        grandTotal = 0;
     }
     else if(cart.innerHTML === "") {
         let cartEmptyMsg = document.createElement("p");

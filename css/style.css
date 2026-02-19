@@ -4,7 +4,6 @@
 } */
 
 body {
-    font-family: glitchGoblin;
     color: white;
     background-color: black;
 }
@@ -36,10 +35,6 @@ button {
 #intro {
     text-align: center;
     border: 2px solid red;
-}
-
-#strong-border {
-    border: 5px solid blue;
 }
 
 #left > section {
@@ -118,6 +113,9 @@ header, footer {
     .container section {
         grid-template-columns: 1fr;
     }
+    #right {
+        flex-direction: column;
+    }
 }
 
 /* Responsive design for large phones and portrait tablets */
@@ -130,7 +128,7 @@ header, footer {
 /* Responsive design for landscape tablets, laptops, and desktops */
 @media (max-width: 768px) {
     .container {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
     }
     
     #right {
@@ -155,13 +153,13 @@ header, footer {
     flex-direction: column;
 }
 
-#cart h2 {
+/* #cart h2 {
     margin-top: 0;
     margin-bottom: 15px;
     font-size: 1.3em;
     border-bottom: 2px solid #4CAF50;
     padding-bottom: 10px;
-}
+} */
 
 /* Style individual cart items */
 .cart-item {
@@ -184,11 +182,11 @@ header, footer {
     line-height: 1.4;
 }
 
-.cart-item hr {
+/* .cart-item hr {
     border: none;
     border-top: 1px solid #444;
     margin: 10px 0 0 0;
-}
+} */
 
 /* Style the totals section */
 #totals {
@@ -290,4 +288,8 @@ header, footer {
     padding: 15px;
     border-radius: 8px;
     border: 2px solid #333;
+}
+
+.bold {
+    font-weight: bold;
 }
