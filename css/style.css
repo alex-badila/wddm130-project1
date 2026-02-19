@@ -109,14 +109,14 @@ header, footer {
 }
 
 /* Responsive design for phones */
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
     .container section {
         grid-template-columns: 1fr;
     }
     #right {
         flex-direction: column;
     }
-}
+} */
 
 /* Responsive design for large phones and portrait tablets */
 @media (min-width: 600px) {
