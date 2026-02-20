@@ -95,12 +95,6 @@ function handleClick() {
     // Clear the message section when valid quantity is entered
     message.textContent = "";
 
-
-    // Clear any error messages (check if cart only contains text)
-    // if (cart.childNodes.length === 1 && cart.childNodes[0].nodeType === Node.TEXT_NODE) {
-    //     cart.textContent = "";
-    // }
-
     // Calculate subtotal for this item
     let itemSubtotal = productPrice * quantity;
     

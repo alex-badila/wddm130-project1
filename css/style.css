@@ -1,8 +1,3 @@
-/* @font-face {
-  font-family: glitchGoblin; 
-  src: url(GlitchGoblin.ttf); 
-} */
-
 body {
     color: white;
     background-color: black;
@@ -108,16 +103,6 @@ header, footer {
     text-align: center;
 }
 
-/* Responsive design for phones */
-/* @media (max-width: 600px) {
-    .container section {
-        grid-template-columns: 1fr;
-    }
-    #right {
-        flex-direction: column;
-    }
-} */
-
 /* Responsive design for large phones and portrait tablets */
 @media (min-width: 600px) {
     .container section {
@@ -153,14 +138,6 @@ header, footer {
     flex-direction: column;
 }
 
-/* #cart h2 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    font-size: 1.3em;
-    border-bottom: 2px solid #4CAF50;
-    padding-bottom: 10px;
-} */
-
 /* Style individual cart items */
 .cart-item {
     background-color: #2a2a2a;
@@ -181,12 +158,6 @@ header, footer {
     font-size: 0.85em;
     line-height: 1.4;
 }
-
-/* .cart-item hr {
-    border: none;
-    border-top: 1px solid #444;
-    margin: 10px 0 0 0;
-} */
 
 /* Style the totals section */
 #totals {
