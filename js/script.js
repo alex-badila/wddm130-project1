@@ -75,11 +75,16 @@ function handleClick() {
     let quantityInput = document.getElementById(productId + '-quantity');
     let quantity = parseInt(quantityInput.value);
     
-    // Validate quantity
-    if (quantity <= 0) {
+    // Validate the quantity input
+    if(quantity <= 0) {
         message.textContent = "Please enter a quantity greater than 0";
         return;
     }
+    else if(isNaN(quantity)) {
+        message.textContent = "Please enter a number for quantity";
+        return;
+    }
+    
 
     // Clear the message section when valid quantity is entered
     message.textContent = "";
