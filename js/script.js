@@ -44,35 +44,22 @@ const displayProducts = () => {
 
 // Attaches listeners to each button
 function attachEventListeners() {
-    let neuromancerButton = document.getElementById("neuromancer-button");
-    let theMatrixDVDButton = document.getElementById("the-matrix-dvd-button");
-    let equilibriumDVDButton = document.getElementById("equilibrium-dvd-button");
-    let monaLisaOverdriveButton = document.getElementById("mona-lisa-overdrive-button");
-    let countZeroButton = document.getElementById("count-zero-button");
-    let ghostInTheShellDVDButton = document.getElementById("ghost-in-the-shell-dvd-button");
-    let akiraDVDButton = document.getElementById("akira-dvd-button");
-    let alitaBattleAngelDVDButton = document.getElementById("alita--battle-angel-dvd-button");
-
-    neuromancerButton.addEventListener("click", handleClick);
-    theMatrixDVDButton.addEventListener("click", handleClick);
-    equilibriumDVDButton.addEventListener("click", handleClick);
-    monaLisaOverdriveButton.addEventListener("click", handleClick);
-    countZeroButton.addEventListener("click", handleClick);
-    ghostInTheShellDVDButton.addEventListener("click", handleClick);
-    akiraDVDButton.addEventListener("click", handleClick);
-    alitaBattleAngelDVDButton.addEventListener("click", handleClick);
+    let left = document.getElementById("left");
+    
+    left.addEventListener("click", function(event) {
+        if (event.target.matches("button")) {
+            handleClick.call(event.target);
+        }
+    });
 }
 
 // If button clicked, adds the relevant information to the shopping cart
 function handleClick() {
-    // Get the product ID without the "-button" suffix
-    let productId = this.id.replace('-button', '');
-    
     // Get the product's data from the DOM
     let productCard = this.closest('.product');
     let productName = productCard.querySelector('h3').textContent;
     let productPrice = parseFloat(productCard.querySelector('.price').textContent.replace('$', ''));
-    let quantityInput = document.getElementById(productId + '-quantity');
+    let quantityInput = productCard.querySelector('input[type="number"]');
     let quantity = parseInt(quantityInput.value);
     
     // Validate the quantity input
