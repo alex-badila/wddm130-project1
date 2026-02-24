@@ -9,33 +9,22 @@ const displayProducts = () => {
     let left = document.getElementById("left");
     let content = "<section>";
 
-    // Create the array for the items to sell
-    // Product Image Product Name Price
-    const products = ["neuromancer.jpg", "Neuromancer", 25.99,
-                        "the-matrix-dvd.jpg", "The Matrix DVD", 19.99,
-                        "equilibrium-dvd.jpg", "Equilibrium DVD", 29.99,
-                        "mona-lisa-overdrive.jpg", "Mona Lisa Overdrive", 15.99,
-                        "count-zero.jpg", "Count Zero", 25.99,
-                        "ghost-in-the-shell-dvd.jpg", "Ghost in the Shell DVD", 12.99,
-                        "akira-dvd.jpg", "Akira DVD", 26.99,
-                        "alita-battle-angel-dvd.jpg", "Alita: Battle Angel DVD", 19.99
-    ]
+    // Initialize the parallel arrays
+    const images = ["neuromancer.jpg", "the-matrix-dvd.jpg", "equilibrium-dvd.jpg", "mona-lisa-overdrive.jpg", "count-zero.jpg", "ghost-in-the-shell-dvd.jpg", "akira-dvd.jpg", "alita-battle-angel-dvd.jpg"];
+    const names = ["Neuromancer", "The Matrix DVD", "Equilibrium DVD", "Mona Lisa Overdrive", "Count Zero", "Ghost in the Shell DVD", "Akira DVD", "Alita: Battle Angel DVD"];
+    const prices = [25.99, 19.99, 29.99, 15.99, 25.99, 12.99, 26.99, 19.99]
 
     // Loop through the array and display its information on the page
-    for(let i = 0; i < products.length; i += 3) {
-        let image = products[i];
-        let productName = products[i + 1];
-        let price = products[i + 2];
-
+    for(let i = 0; i < images.length; i++) {
         content += `<div class="product">`
         // Add the image
-        content += `<img src="${image}" height="200" width="200" alt="${productName}"/> `;
+        content += `<img src="${images[i]}" height="200" width="200" alt="${names[i]}"/> `;
         // Add the product name
-        content += `<h3>${productName}</h3>`;
+        content += `<h3>${names[i]}</h3>`;
         // Add the price
-        content += `<p class="price">$${price.toFixed(2)}</p>`;
+        content += `<p class="price">$${prices[i].toFixed(2)}</p>`;
         // Add the quantity, and give it an id depending on the product
-        let productId = productName.toLowerCase().replace(/[:\s]/g, '-');
+        let productId = names[i].toLowerCase().replace(/[:\s]/g, '-');
         content += `<label for="${productId}-quantity">Quantity:</label>`;
         content += `<input type="number" id="${productId}-quantity" min="0" value="0">`;
 
