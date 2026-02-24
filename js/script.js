@@ -136,7 +136,7 @@ const validateWithRegEx = (regEx, inputString) => {
 const generateReceipt = () => {
     let postalRegEx = /^[a-zA-Z]\d[a-zA-Z]\s?\d[a-zA-Z]\d$/;
     let phoneRegEx = /^\(?\d{3}\)?(\s|-)\d{3}(\s|-)\d{4}$/;
-    let emailRegEx = /^\w+@[a-zA-Z0-9]+.[a-zA-Z0-9]+$/;
+    let emailRegEx = /^\w+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/;
 
     // Extract all the relevant values from the form
     let thisForm = document.forms["checkoutForm"];
