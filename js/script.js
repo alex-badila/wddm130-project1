@@ -23,14 +23,11 @@ const displayProducts = () => {
         content += `<h3>${names[i]}</h3>`;
         // Add the price
         content += `<p class="price">$${prices[i].toFixed(2)}</p>`;
-        // Add the quantity, and give it an id depending on the product
-        let productId = names[i].toLowerCase().replace(/[:\s]/g, '-');
-        content += `<label for="${productId}-quantity">Quantity:</label>`;
-        content += `<input type="number" id="${productId}-quantity" min="0" value="0">`;
-
-        // Add the button, and it an id depending on the product
-        content += `<button id = "${productId}-button">Buy Now</button>`;
-
+        // Add the quantity
+        content += `<label for="quantity">Quantity:</label>`;
+        content += `<input type="number" id="quantity" min="0" value="0">`;
+        // Add the button
+        content += `<button>Buy Now</button>`;
         content += `</div>`;
     }
 
